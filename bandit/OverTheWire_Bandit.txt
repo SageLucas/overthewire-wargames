@@ -1,0 +1,80 @@
+Level 1: used ls to list the files in the current directory, then cat to read the file since the current dir is already "home"
+
+Level 2: To open files named "-" or starting with "-", you need redirect "cat < -" or "cat ./-" to override the normal functionality of "-"
+
+Level 3: Use single/double quotes for filenames with special characters, including spaces. Have to use ./ or < to ignore -- at start of filename.
+
+Level 4: "find" command shows hidden files while ls doesn't.
+
+Level 5: The only human-readable file is the pw, the others are just binary/compiled files, use cmd to see which is human-readable.
+
+Level 6: Use "find" command to look for the file described, use "file" command to check for file type, then read with cat.
+
+Level 7: Use find command with the related flags to find the file, then read it with cat.
+
+Level 8: Use grep command to find password next to the relevant word.
+
+Level 9: You need to use sort first in order to sort the lines, because uniq only remembers the previous line to compare with the next.
+Then pipe the output of sort into uniq to get the uniq line: sort data.txt | uniq -u
+
+Level 10: Use strings to read through the binary file human-readable text, and pipe it into grep to look only for the stuff after "=".
+
+Level 11: Use base64 -d data.txt command to decode the file encoded in base64.
+
+Level 12: Use the translate cmd to "translate" the file to an alphabet moved 13 spaces. tr 'a-zA-Z' 'n-za-mN-ZA-M' < data.txt
+
+Level 13: Have to use a bunch of commands gzip, bzip2, tar, file etc. to decompress a compressed file until you get to the ASCII
+file containing the password.
+
+Level 14: Have to log into bandit14 using the private ssh key offered. Either by copying it as a file, or using ssh-agent.
+
+Level 15: Use echo password | ncat localhost 30000
+
+Level 16: Use ncat or openssl to connect to localhost:30001 and type in level 15 password for level 16 password.
+
+Level 17: Use nmap to check which ports are listening. Then use -sV flag to check the 'version' of each port ssl/tls.
+Send level 16 pw to the port, get the private key and use it to connect through ssh as bandit17.
+
+Level 18: Need to use diff command to see the difference between the 2 files, the string from password.new is the password.
+
+Level 19: Need to append a command at the end of ssh to run before .bashrc runs and kicks you out.
+
+Level 20: The file with red background shows it is a "setuid" file. Running a cmd with that file runs it with that user's permissions.
+
+Level 21: In order to get the pw for next level need to first set up a port as a "listener" and then run the ./suconnect file to connect
+to the listener port which will send the previous level's pw, and then return the pw for the next level.
+
+Level 22: Go through a task scheduler folder to see what script is running, go to location of script, it copies the pw from the bandit22
+user into a tmp folder file that can be read by anyone.
+
+Level 23: Read what the background scripts are doing, and then used the md5sum hashing function to figure out the md5sum to where the
+pw is stored, then that file in the tmp folder.
+
+Level 24: Created a script that was added to the specified folder where there is an automated script running every minute that runs all the 
+scripts found in the folder. Added script that runs with bandit24 permissions to copy the password file to a tmp location.
+
+Level 25: Used for loop to brute force finding the correct bandit24 pw + pin combination to get bandit25 pw from daemon listening on
+localhost:30002: for pin in {0000..9999}; do
+    echo "BANDIT24_PASSWORD $pin"
+done | ncat localhost 30002
+In order to check which pin is the correct one use paste to combine the input and output together on one line:
+paste -d ' ' <(for pin in {0000..9999}; do echo "PIN: $pin"; done) <(for pin in {0000..9999}; do echo "BANDIT24_PASSWORD $pin"; done | ncat localhost 30002)
+
+Level 26: Bandit26 user does not have /bin/bash as default shell, it just runs a script printing a text file with "more" pager utility.
+Need to make the terminal window few lines small in order to make more not be able to print everything and wait for input, after which
+pressing v goes into vim where you can write :shell to spawn the normal bash shell.
+
+Level 27: All you have to do for this level is use the setuid file bandit27-do to read /etc/bandit_pass/bandit27 as done in a previous level.
+
+Level 28: Simple git clone from the repo given on local PC in order to then read the README file for the next level's password.
+
+Level 29: Have to check git log to see previous commits which had the password in the README.md file before it was changed to hidden.
+
+Level 30: Have to check different branches, and read README.md file to find user bandit30 with the relevant password.
+
+Level 31: Need to use git tag command to look for tags. Branch has only 1 tag which is "secret", then use git show secret for password.
+
+Level 32: Have to create a file key.txt with the text given and push it to master branch in order to receive the password.
+
+Level 33: In order to break out of the uppershell, write $0 to see the currently running shell. Afterwards, open vim,
+:set shell=/bin/bash, and open :shell to break out of uppershell.

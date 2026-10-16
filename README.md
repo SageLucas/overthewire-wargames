@@ -1,2 +1,1 @@
-# overthewire-wargames
-OverTheWire Wargames - Notes & Solutions
+# OverTheWire Wargames - Notes & Solutions

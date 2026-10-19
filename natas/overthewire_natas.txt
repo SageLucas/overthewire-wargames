@@ -6,8 +6,7 @@ Level 2: Hint go to the website's public files.
 
 Level 3: Hint /robots.txt
 
-Level 4: Open devtools, network tab, right click request to natas5 > edit and resend > manually add/modify the header
-to the natas5 address.
+Level 4: Open devtools, network tab, right click request to natas5 > edit and resend > manually add, modify the header to the natas5 address.
 
 Level 5: In cookies, there is a variable called "loggedin" == 0, need to be changed to 1.
 
@@ -21,72 +20,54 @@ Level 9: Need to break out of grep to then read /etc/natas_webpass/natas10 passw
 
 Level 10: .* /etc/natas_webpass/natas11 since you can't use certain special characters.
 
-Level 11: XOR encryption means Ciphertext = Plaintext ^ Key, which means Key = Plaintext ^ Ciphertext. Once you find
-the XOR encryption key, you use that in order to get a new cookie with showpassword variable == yes. Key: kBSw
+Level 11: XOR encryption means Ciphertext = Plaintext ^ Key, which means Key = Plaintext ^ Ciphertext. Once you find the XOR encryption key, you use that in order to get a new cookie with showpassword variable == yes. Key: kBSw
 
-level 12: Make file with code to read /etc/natas_webpass/natas13 with .php extension. Inspect element to change the
-name of the file before uploading it (or use something like Burp Suite to send a request with the .php file name).
+Level 12: Make file with code to read /etc/natas_webpass/natas13 with .php extension. Inspect element to change the name of the file before uploading it (or use something like Burp Suite to send a request with the .php file name).
 
-Level 13: Create a file with bash/php script to insert the header bytes of a JPG/image file or use GIF89a in plaintext
-to trick the exif_imagetype() function to think the file is an image even if the extension is .php.
+Level 13: Create a file with bash/php script to insert the header bytes of a JPG/image file or use GIF89a in plaintext to trick the exif_imagetype() function to think the file is an image even if the extension is .php.
 
 Level 14: SQL injection: ' OR '1'='1 or " OR "1"="1 into the form.
 
-Level 15: Blind SQL injection: Since manual guessing takes 32+ characters, write a Python script (requests library)
-to loop through characters (a-z, A-Z, 0-9) until the "User exists" response is triggered to find the correct characters.
+Level 15: Blind SQL injection: Since manual guessing takes 32+ characters, write a Python script (requests library) to loop through characters (a-z, A-Z, 0-9) until the "User exists" response is triggered to find the correct characters.
 
-Level 16: Written a python script to brute force finding the password through testing 1 character at a time. If the 
-character is not found, the dictionary will return empty because the password starts with that character/string of 
-characters, so it saves the character and moves on to test the next character.
-$(grep -E ^{test_guess} /etc/natas_webpass/natas17)
+Level 16: Written a python script to brute force finding the password through testing 1 character at a time. If the character is not found, the dictionary will return empty because the password starts with that character/string of characters, so it saves the character and moves on to test the next character. $(grep -E ^{test_guess} /etc/natas_webpass/natas17)
 
-Level 17: Time-based SQL injection. Write a script that checks each character in turn to brute-force find the correct
-characters one at a time, and add a SLEEP() funtion as a check to know when it finds a correct character.
+Level 17: Time-based SQL injection. Write a script that checks each character in turn to brute-force find the correct characters one at a time, and add a SLEEP() funtion as a check to know when it finds a correct character.
 
-Level 18: Wrote a script to check every session id from 1-640 to see which admin session id was left open/saved
-and "hijack" the admin session.
+Level 18: Wrote a script to check every session id from 1-640 to see which admin session id was left open/saved and "hijack" the admin session.
 
-Level 19: Wrote a script to check every session id from 1-640 to see which admin session id was left open/saved
-and "hijack" the admin session, with the added difference being that the session ID is now encoded in hex.
+Level 19: Wrote a script to check every session id from 1-640 to see which admin session id was left open/saved and "hijack" the admin session, with the added difference being that the session ID is now encoded in hex.
 
-Level 20: Considering how the data is stored on file for this level, writing a script with payload = 'user\nadmin 1'
-makes it so that "user" is taken as the first input, and then a new line added with "admin 1", on the next request
-detecting the login as admin.
+Level 20: Considering how the data is stored on file for this level, writing a script with payload = 'user\nadmin 1' makes it so that "user" is taken as the first input, and then a new line added with "admin 1", on the next request detecting the login as admin.
 
-Level 21: Wrote a script that sent a payload to the subdomain colocated url that was vulnerable, then set sessions ID
-cookie from the subdomain to the original domain in order to be recognised as admin.
+Level 21: Wrote a script that sent a payload to the subdomain colocated url that was vulnerable, then set sessions ID cookie from the subdomain to the original domain in order to be recognised as admin.
 
-Level 22: The website redirects to header("Location: /");, all you have to do is add a flag in the GET request
-with allow_redirects=False, and the rest of the php code executes normally thinking you are admin.
+Level 22: The website redirects to header("Location: /");, all you have to do is add a flag in the GET request with allow_redirects=False, and the rest of the php code executes normally thinking you are admin.
 
-Level 23: Pre-8.0 version of PHP converted numbers into numbers, but chars into 0. $_REQUEST["passwd"] > 10 evaluates
-as TRUE only if the string in "$_REQUEST["passwd"]" starts with integers > 10. In python script sending the params
-{"passwd": "11iloveyou"} evaluates the condition as TRUE, giving the password for the next level.
+Level 23: Pre-8.0 version of PHP converted numbers into numbers, but chars into 0. $_REQUEST["passwd"] > 10 evaluates as TRUE only if the string in "$_REQUEST["passwd"]" starts with integers > 10. In python script sending the params {"passwd": "11iloveyou"} evaluates the condition as TRUE, giving the password for the next level.
 
-Level 24: Older PHP versions give a warning when you pass an array in strcmp "params={"passwd[]": 1}", strcmp returning
-NULL as an error, and then !NULL = TRUE in: if(!strcmp($_REQUEST["passwd"],"<censored>")).
+Level 24: Older PHP versions give a warning when you pass an array in strcmp "params={"passwd[]": 1}", strcmp returning NULL as an error, and then !NULL = TRUE in:
+if(strcmp($_REQUEST["passwd"],"<censored>")).
 
-Level 25: Send the payload for reading the password from /etc/natas_webpass/natas26 in the header, with the path to
-where the logs are saved, and nested ../ as "....//" since the check for "../" manipulating paths is not recursive.
+Level 25: Send the payload for reading the password from /etc/natas_webpass/natas26 in the header, with the path to where the logs are saved, and nested ../ as "....//" since the check for "../" manipulating paths is not recursive.
 headers={"User-Agent": payload}, params={"lang": f"....//logs/natas25_{sessionID}.log"})
 
 Level 26: Create an object encoded in base64 within a cookie and then make a request to the server with that cookie.
 
-Level 27: Insert payload = {"username": "natas28" + 57 * " " + "a", "password": "123"} into the SQL table, because
-trim() function removes the trailing "a" at the end being character 65. Afterwards when logging in as "natas28" + 57 * " ",
-the SQL dumpData() function returns the first entry found which is "natas28" and its corresponding password.
+Level 27: Insert payload = {"username": "natas28" + 57 * " " + "a", "password": "123"} into the SQL table, because trim() function removes the trailing "a" at the end being character 65. Afterwards when logging in as "natas28" + 57 * " ", the SQL dumpData() function returns the first entry found which is "natas28" and its corresponding password.
 
 Level 28: ECB/CBC Encryption Misuse + SQL Injection Bypass (Byte-Alignment / Block Splicing). Cipher: AES in CBC mode. Block size: 16 bytes.
 
-Level 29: This is a Perl website, opening a file from ".../index.pl?file=...". There is some filtering going on, specifically the "natas" word,
-need to send this command starting with pipe "|" character in order to treat it as a shell command to execute rather than a path to read
-"|cat /etc/*_webpass/*30\0". The null byte (\0 or %00) acts as a string terminator for C-based functions in the backend (or file opening calls),
-forcing the parser to stop reading the filename string right there. This prevents the server from appending extensions (like .html or .txt).
+Level 29: This is a Perl website, opening a file from ".../index.pl?file=...". There is some filtering going on, specifically the "natas" word, need to send this command starting with pipe "|" character in order to treat it as a shell command to execute rather than a path to read
+"|cat /etc/*_webpass/*30\0". The null byte (\0 or %00) acts as a string terminator for C-based functions in the backend (or file opening calls), forcing the parser to stop reading the filename string right there. This prevents the server from appending extensions (like .html or .txt).
 
-Level 30: quote() Perl DBI function has a vulnerability when used with parameters. If passed an array containing an integer, it does not sanitize
-the input anymore by putting quotes around it, instead just inserting it as is, which allows SQL injection. The format of quote() is:
-quote($value, $data_type), and the variable $data_type is a specific hardcoded SQL type of data based on codes: SQL_CHAR / SQL_VARCHAR	1, 12,
-SQL_NUMERIC	2, SQL_DECIMAL	3, SQL_INTEGER	4, etc., so the second value of the array has to be one of the codes that shows the quote() function
-that it is receiving "integer" type data, so it does not sanitize the first array element anymore, which is the SQL injection.
+Level 30: quote() Perl DBI function has a vulnerability when used with parameters. If passed an array containing an integer, it does not sanitize the input anymore by putting quotes around it, instead just inserting it as is, which allows SQL injection. The format of quote() is:
+quote($value, $data_type), and the variable $data_type is a specific hardcoded SQL type of data based on codes:
+SQL_CHAR / SQL_VARCHAR 1, 12, SQL_NUMERIC 2, SQL_DECIMAL 3, SQL_INTEGER	4, etc., so the second value of the array has to be one of the codes that shows the quote() function that it is receiving "integer" type data, so it does not sanitize the first array element anymore, which is the SQL injection.
 
-Level 31: 
+Level 31: Perl CGI file handling vulnerability.
+Rc3837d6qd3KoW0R2IgKssMXRX06btgY
+
+Level 32: Same vulnerability as level 31 (CGI file handling vulnerability), but you have to run "ls ." and "./getpassword".
+
+Level 33: 

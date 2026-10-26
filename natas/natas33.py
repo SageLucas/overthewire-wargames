@@ -8,7 +8,7 @@ auth = HTTPBasicAuth("natas33", "kmIpGpPfpBF529wy1C8FGb9ZSO7fTlKL")
 session = requests.Session()
 session.auth = auth
 
-data = [("file", "ARGV")]
+# data = 
 
 response = requests.post(url, auth=auth,  data=data)
 

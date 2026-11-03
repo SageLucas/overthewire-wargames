@@ -1,0 +1,5 @@
+Leviathan1: There is a .backup folder in the home directory, with a file named bookmarks.html.
+Password for leviathan1 is found inside this file which contains a lot of text, but is easily
+found with "cat booksmarks.html | grep password".
+Password: PiXaSWQqHq
+Leviathan2: 

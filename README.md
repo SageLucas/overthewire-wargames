@@ -1,6 +1,8 @@
 # OverTheWire Wargames - Notes & Solutions
 Wargames Progress:
 
-Bandit - All levels
+Bandit - Finished
 
-Natas - In progress
+Natas - Finished
+
+Leviathan - In progress

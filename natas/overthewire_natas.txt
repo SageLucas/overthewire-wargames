@@ -70,4 +70,5 @@ Rc3837d6qd3KoW0R2IgKssMXRX06btgY
 
 Level 32: Same vulnerability as level 31 (CGI file handling vulnerability), but you have to run "ls ." and "./getpassword".
 
-Level 33: 
+Level 33: Insecure deserialization via phar:// stream wrapper. The application accepts user-supplied filenames and passes them into filesystem functions (like file_exists() or include checks) without sanitization.
+NOTE: Use "php -d phar.readonly=false make_phar.php" to make the test.phar file based on the make_phar.php code. File php_shell.php triggers through test.phar to read the password from the natas33 user password file.

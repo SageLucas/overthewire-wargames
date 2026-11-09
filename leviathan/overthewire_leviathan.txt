@@ -1,5 +1,13 @@
-Leviathan1: There is a .backup folder in the home directory, with a file named bookmarks.html.
+Leviathan 1: There is a .backup folder in the home directory, with a file named bookmarks.html.
 Password for leviathan1 is found inside this file which contains a lot of text, but is easily
 found with "cat booksmarks.html | grep password".
 Password: PiXaSWQqHq
-Leviathan2: 
+
+Leviathan 2: Use ltrace to see inside the "check" file execution.
+Password: ERJ9jTYWXE
+
+Leviathan 3: File "printfile" takes the input and constructs "snprintf(buf, sizeof(buf), "/bin/cat %s", argv[1])", executing it via system(). Argument is not wrapped in quotes in the cmd string, which means it splits at spaces. Create a tmp dir and tmp file as link to etc/leviathan_pass/leviathan3 named "a", create file named "a b". Pass file "a b" to printfile, which will split at the space and execute "/bin/cat a" which is "cat etc/leviathan_pass/leviathan3" since file "a" is a link to "etc/leviathan_pass/leviathan3".
+Password: PiEpxxknZH
+
+Leviathan 4: Same vulnerability as Leviathan 2.
+Password: XIyBbRwAPt

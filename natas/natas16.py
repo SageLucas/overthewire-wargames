@@ -2,7 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 url = "http://natas16.natas.labs.overthewire.org/index.php"
-auth = HTTPBasicAuth("natas16", "Xm6XEeRN3zsGjRDqBPmuqAVV65k7e3Gb")
+auth = HTTPBasicAuth("natas16", "password")
 
 # characters used in Natas passwords (0-9, a-z, A-Z)
 chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

@@ -6,7 +6,7 @@ def format_response(response_text):
 
 url = "http://natas21.natas.labs.overthewire.org/index.php"
 url_colocation = "http://natas21-experimenter.natas.labs.overthewire.org"
-auth = HTTPBasicAuth("natas21", "7meHZ1l2zPoK2v1qfTUxq4Ydfja4UlmU")
+auth = HTTPBasicAuth("natas21", "password")
 
 # create a session object to maintain cookies and authentication between requests
 session = requests.Session()

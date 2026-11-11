@@ -2,7 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 url = "http://natas32.natas.labs.overthewire.org/index.pl"
-auth = HTTPBasicAuth("natas32", "Rc3837d6qd3KoW0R2IgKssMXRX06btgY")
+auth = HTTPBasicAuth("natas32", "password")
 
 # create a session object to maintain cookies and authentication between requests
 session = requests.Session()

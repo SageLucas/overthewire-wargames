@@ -2,7 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 url = "http://natas19.natas.labs.overthewire.org/index.php"
-auth = HTTPBasicAuth("natas19", "qvwtMqAcVSBlf7HE3sw9pljhqqPF9MMT")
+auth = HTTPBasicAuth("natas19", "password")
 
 response = requests.get(url, auth=auth, params={"debug": "1"})
 

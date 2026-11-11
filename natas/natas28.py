@@ -4,7 +4,7 @@ from requests.auth import HTTPBasicAuth
 from urllib.parse import quote, urlparse, parse_qs
 
 url = "http://natas28.natas.labs.overthewire.org/index.php"
-auth = HTTPBasicAuth("natas28", "Hy5wZLfVml7jnGmuvfbilRTUUkk29Dv3")
+auth = HTTPBasicAuth("natas28", "password")
 
 # create a session object to maintain cookies and authentication between requests
 session = requests.Session()

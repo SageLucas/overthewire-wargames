@@ -1,13 +1,15 @@
 Leviathan 1: There is a .backup folder in the home directory, with a file named bookmarks.html.
 Password for leviathan1 is found inside this file which contains a lot of text, but is easily
 found with "cat booksmarks.html | grep password".
-Password: PiXaSWQqHq
 
 Leviathan 2: Use ltrace to see inside the "check" file execution.
-Password: ERJ9jTYWXE
 
 Leviathan 3: File "printfile" takes the input and constructs "snprintf(buf, sizeof(buf), "/bin/cat %s", argv[1])", executing it via system(). Argument is not wrapped in quotes in the cmd string, which means it splits at spaces. Create a tmp dir and tmp file as link to etc/leviathan_pass/leviathan3 named "a", create file named "a b". Pass file "a b" to printfile, which will split at the space and execute "/bin/cat a" which is "cat etc/leviathan_pass/leviathan3" since file "a" is a link to "etc/leviathan_pass/leviathan3".
-Password: PiEpxxknZH
 
 Leviathan 4: Same vulnerability as Leviathan 2.
-Password: XIyBbRwAPt
+
+Leviathan 5: There is a hidden folder named .trash, which contains a file named bin. Running this file reveals a few binary codes, which reveals the password when converted to ASCII.
+
+Leviathan 6: The leviathan5 file is reading /tmp/file.log with elevated privileges as leviathan6 user. Creating a symbolic link to the password file for leviathan6 "ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log" will open it and return the password.
+
+Leviathan 7: File leviathan6 requires a 4 digit pin. A brute force attack testing all PINs from 0000...9999 reveals pin 7123 spawns a shell as leviathan7, which can then be used to read /etc/leviathan_pass/leviathan7.
